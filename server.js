@@ -50,3 +50,22 @@ app.get("/", (req, res) => {
 app.listen(PORT, () => {
   console.log(`Server ${PORT} portunda çalışıyor.`);
 });
+
+app.get("/api/laptop-fiyat", async (req, res) => {
+  try {
+    const model = req.query.model;
+    if (!model) {
+      return res.status(400).json({ error: "Model parametresi gerekli" });
+    }
+
+    // Buraya scraping veya veri çekme kodu gelecek
+    // Örnek statik cevap:
+    res.json([
+      { model: "Asus TUF Gaming F15", fiyat: 21000, marka: "Asus" },
+      { model: "Lenovo IdeaPad 3", fiyat: 18000, marka: "Lenovo" }
+    ]);
+  } catch (error) {
+    console.error("API Hatası:", error);
+    res.status(500).json({ error: "Sunucu hatası" });
+  }
+});
